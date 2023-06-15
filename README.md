@@ -4,9 +4,9 @@ Modelo a usar: nexys2-500.
 
 ## Simular
 
-- En consola: `ghdl -a contador.vhdl contador_triple.vhdl test_triple.vhdl && ghdl -e contador_triple_test && ghdl -r contador_triple_test --vcd=out.vcd`
+- En consola: `ghdl -a <archivos vhdl en orden> && ghdl -e <workbench vhdl> && ghdl -r <workbench vhdl> --vcd=out.vcd`
 
-- Gráficamente abrir **GTKWave** e insertar el archivo del workbench en el menú de la izquierda. 
+- Gráficamente: abrir **GTKWave** e insertar el archivo del workbench en el menú de la izquierda. 
 
 ## Compilación
 
@@ -14,10 +14,9 @@ Modelo a usar: nexys2-500.
 
 ## Algunos comandos útiles
 
-
 - `stat <archivo>` para ver información de si el archivo tiene datos.
 
-- Para ver si la FPGA está siendo tomada por la VM ejecutar el comando `lsusb`.
+- `lsusb` observa los dispositivos conectados al usb. Sirve para ver si la FPGA está siendo tomada por la VM.
 
 ## Proyecto Red Neuronal
 
