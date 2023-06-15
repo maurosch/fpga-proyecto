@@ -1,7 +1,0 @@
-v 4
-file . "perceptron.vhdl" "ff8682c840b1b0faa781b71fdcd81927994bfe08" "20230608234445.077":
-  entity perceptron at 1( 0) + 0 on 47;
-  architecture logic of perceptron at 16( 329) + 0 on 48;
-file . "test.vhdl" "8d87ccf42b39ae7f4d1d3e9a93f2f7363d5f8036" "20230608234445.078":
-  entity perceptron_test at 1( 0) + 0 on 49;
-  architecture behavior of perceptron_test at 8( 118) + 0 on 50;
