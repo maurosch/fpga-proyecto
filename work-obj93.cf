@@ -1,10 +1,11 @@
 v 4
+file . "perceptron_fpga/test.vhdl" "a4ac554385297a43c826a149f08b9a6f13e714fb" "20230622225036.248":
+  entity perceptron_test at 1( 0) + 0 on 218;
+  architecture behavior of perceptron_test at 11( 145) + 0 on 219;
+file . "perceptron_fpga/perceptron.vhdl" "4b78722aa75d514a5667f0d9045e18ead3ee32e4" "20230622225036.247":
+  package my_package at 1( 0) + 0 on 215;
+  entity perceptron at 9( 194) + 0 on 216;
+  architecture logic of perceptron at 29( 626) + 0 on 217;
 file . "perceptron_fpga/contador.vhdl" "db2265902f0fcd70b7761b770ef7ac137185f06d" "20230615215046.855":
   entity contador at 1( 0) + 0 on 29;
   architecture logic of contador at 17( 316) + 0 on 30;
-file . "perceptron_fpga/perceptron.vhdl" "ff8682c840b1b0faa781b71fdcd81927994bfe08" "20230615215046.856":
-  entity perceptron at 1( 0) + 0 on 31;
-  architecture logic of perceptron at 16( 329) + 0 on 32;
-file . "perceptron_fpga/test.vhdl" "8d87ccf42b39ae7f4d1d3e9a93f2f7363d5f8036" "20230615215046.857":
-  entity perceptron_test at 1( 0) + 0 on 33;
-  architecture behavior of perceptron_test at 8( 118) + 0 on 34;
