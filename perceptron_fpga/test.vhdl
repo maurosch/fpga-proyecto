@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+--use work.fixed_generic_pkg_mod.all;
 
 use work.my_package.all;
 
@@ -38,12 +39,16 @@ begin
 		wait for clock_period/2;
 	end process;
 
-    peso_1_v <= std_logic_vector(to_signed(2, 64));
-    peso_1(0) <= peso_1_v;
-    peso_2_v <= std_logic_vector(to_signed(3, 64));
-    peso_2(0) <= peso_2_v;
+    --peso_1_v <= std_logic_vector(to_signed(8589934592, 64)); --2
+    peso_1_v <= b"0000000000000000_0000000000000010_0000000000000000_0000000000000000";
+	peso_1(0) <= peso_1_v;
+    --peso_2_v <= std_logic_vector(to_signed(12884901888, 64)); --3
+    peso_2_v <= b"0000000000000000_0000000000000011_0000000000000000_0000000000000000";
 
-    input_v <= std_logic_vector(to_signed(4, 64));
+    peso_2(0) <= peso_2_v;
+	--103079215104 == 24
+    --input_v <= std_logic_vector(to_signed(17179869184, 64)); --4
+    input_v <= b"0000000000000000_0000000000000100_0000000000000000_0000000000000000";
     input_in(0) <= input_v;
 
 	clr_i <= '1', '0' after 200 ms;

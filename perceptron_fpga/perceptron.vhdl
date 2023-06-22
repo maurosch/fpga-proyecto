@@ -30,6 +30,7 @@ architecture logic of perceptron is
 begin
 	PERCEPTRON_PROC: process(clock_i, enable_i)
 	variable vacc : signed(127 downto 0) := to_signed(0, 128);
+    constant DECIMALS : natural := 32;
     begin
         
 		if rising_edge(clock_i) then
@@ -39,7 +40,7 @@ begin
 
 			if enable_i = '1' then
                 l_acc : for k in 0 to peso_i'length-1 loop
-                    vacc := signed(vacc + signed(input_i(0)) * signed(peso_i(0)));
+                    vacc := vacc + signed(input_i(0)) * signed(peso_i(0));
                 end loop l_acc;
 
                 -- funcion de activacion
@@ -47,11 +48,10 @@ begin
                     -- input_pesado negativo
                     output_o <= (others => '0');
                 else
-                    output_o <= std_logic_vector(vacc(63 downto 0));
+                    output_o <= std_logic_vector(vacc(63+DECIMALS downto DECIMALS));
                 end if;
                 vacc := to_signed(0, 128);
 			end if;
 		end if;
 	end process;
 end architecture;
-
