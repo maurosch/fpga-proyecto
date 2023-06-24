@@ -40,7 +40,7 @@ begin
 
 			if enable_i = '1' then
                 l_acc : for k in 0 to peso_i'length-1 loop
-                    vacc := vacc + signed(input_i(0)) * signed(peso_i(0));
+                    vacc := vacc + signed(input_i(k)) * signed(peso_i(k));
                 end loop l_acc;
 
                 -- funcion de activacion

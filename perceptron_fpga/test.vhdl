@@ -10,6 +10,7 @@ entity perceptron_test IS
 end perceptron_test;
 
 architecture behavior of perceptron_test is 
+    constant N : natural := 1;
 	-- Inputs
 	signal peso_1 : perceptron_input(0 downto 0);
 	signal peso_2 : perceptron_input(0 downto 0);
@@ -55,6 +56,7 @@ begin
 	enable_i <= '0', '1' after 300 ms;
 
 	uut1 : entity work.perceptron
+    generic map(N => N)
 	port map (clock_i => clock_i,
 		  clr_i => clr_i,
 		  peso_i => peso_1,
@@ -66,6 +68,7 @@ begin
 	input_in2(0) <= output_1;
 
 	uut2 : entity work.perceptron
+    generic map(N => N)
 	port map (clock_i => clock_i,
 		  clr_i => clr_i,
 		  peso_i => peso_2,
