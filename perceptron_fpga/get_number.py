@@ -26,4 +26,4 @@ if __name__ == '__main__':
     else:
         binary_str = positive_str(number)
     number_with_underscores = add_underscores(binary_str)
-    print(f"b\"{number_with_underscores}\" -- {sys.argv[1]}")
+    print(f"b\"{number_with_underscores}\"; -- {sys.argv[1]}")

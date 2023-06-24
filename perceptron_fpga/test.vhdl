@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 --use work.fixed_generic_pkg_mod.all;
 
-use work.my_package.all;
+use work.perceptron_package.perceptron_input;
 
 
 entity perceptron_test IS

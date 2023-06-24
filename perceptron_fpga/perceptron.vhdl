@@ -2,11 +2,11 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-package my_package is
+package perceptron_package is
     type perceptron_input is array (natural range <>) of std_logic_vector(63 downto 0);
 end package;
 
-use work.my_package.all;
+use work.perceptron_package.perceptron_input;
 
 library IEEE;
 use IEEE.std_logic_1164.all;

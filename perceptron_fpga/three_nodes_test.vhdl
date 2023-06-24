@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-use work.my_package.all;
+use work.perceptron_package.perceptron_input;
 
 
 entity three_nodes_test IS
