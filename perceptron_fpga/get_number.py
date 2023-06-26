@@ -10,20 +10,38 @@ def add_underscores(my_str, group=16, char='_'):
     return char.join(my_str[i:i+group] for i in range(0, len(my_str), group))
 
 '''
-Use: python get_number.py <number>
+Use: python get_number.py <array_variable_name> <elements_variable_name> <numbers list>
 
-Prints that number in 64 bits binary. You can just copy and paste the output to the VHDL file.
-It also adds a comment at the end of the line with the number asked because I am a great person :)
+Prints the following lines ready to copy and paste to a VHDL file.
+
+<elements_variable_name>_0 <= <number_0 in 64 bits>; -- <number_0>
+.
+.
+.
+<elements_variable_name>_k <= <number_k in 64 bits>; -- <number_k>
+
+<array_variable_name>(0) <= <elements_variable_name>_0;
+.
+.
+.
+<array_variable_name>(k) <= <elements_variable_name>_k;
 '''
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Give me a number bro!")
-        sys.exit(1)
+    array_variable_name = sys.argv[1]
+    variable_name = sys.argv[2]
+    output_str = ""
 
-    number = int(sys.argv[1])<<32
-    if number < 0:
-        binary_str = negative_str(number)
-    else:
-        binary_str = positive_str(number)
-    number_with_underscores = add_underscores(binary_str)
-    print(f"b\"{number_with_underscores}\"; -- {sys.argv[1]}")
+    for i in range(3, len(sys.argv)):
+        original_number = sys.argv[i]
+        number = int(original_number)<<32
+        if number < 0:
+            binary_str = negative_str(number)
+        else:
+            binary_str = positive_str(number)
+        number_with_underscores = add_underscores(binary_str)
+        output_str += f"{variable_name}_{i-3} <= b\"{number_with_underscores}\"; -- {original_number}\n"
+
+    output_str += "\n"
+    for i in range(3, len(sys.argv)):
+        output_str += f"{array_variable_name}({i-3}) <= {variable_name}_{i-3};\n"
+    print(output_str)
