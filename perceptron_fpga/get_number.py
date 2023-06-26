@@ -9,6 +9,18 @@ def positive_str(input):
 def add_underscores(my_str, group=16, char='_'):
     return char.join(my_str[i:i+group] for i in range(0, len(my_str), group))
 
+
+def get_number_line(variable_name, index, original_number):
+    output_str = ""
+    shifted_number = int(original_number)<<32
+    if int(original_number) < 0:
+        binary_number = negative_str(shifted_number)
+    else:
+        binary_number = positive_str(shifted_number)
+    binary_number = add_underscores(binary_number)
+    return f"\t{variable_name}({index}) := b\"{binary_number}\"; -- {original_number}"
+
+
 '''
 Use: python get_number.py <array_variable_name> <elements_variable_name> <numbers list>
 
