@@ -5,6 +5,7 @@ ghdl -a perceptron_fpga/perceptron.vhdl \
         perceptron_fpga/test.vhdl \
         perceptron_fpga/three_nodes_test.vhdl \
         perceptron_fpga/perceptron_row_test.vhdl \
+        perceptron_fpga/matrix_weights.vhdl \
         perceptron_fpga/perceptron_matrix_test.vhdl
 
 ghdl -e perceptron_test
