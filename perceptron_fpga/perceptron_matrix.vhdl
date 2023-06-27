@@ -10,17 +10,20 @@ generic (
     COLUMNS: natural := 1;
     ROWS_PER_COLUMN: natural := 1;
     MATRIX_INPUTS: natural := 1;
-    WEIGHTS: natural := 1; --COLUMNS * (ROWS_PER_COLUMN * ROWS_PER_COLUMN);
-    WEIGHTS_IN: natural := 1 --ROWS_PER_COLUMN * MATRIX_INPUTS
+    MATRIX_OUTPUTS: natural := 1
 );
+-- INPUT WEIGHTS = MATRIX_INPUTS * ROWS_PER_COLUMN
+-- MIDDLE WEIGTHS = (ROWS_PER_COLUMN * ROWS_PER_COLUMN) * (COLUMNS - 3)
+-- OUTPUT WEIGTHS = MATRIX_OUTPUTS * ROWS_PER_COLUMN
 port (
 	clock_i : in std_logic;
 	clr_i : in std_logic;
 	enable_i : in std_logic;
-    pesos_i : in perceptron_input(WEIGHTS-1 downto 0);
-    pesos_in_i : in perceptron_input(WEIGHTS_IN-1 downto 0);
+    pesos_out_i : in perceptron_input((MATRIX_OUTPUTS * ROWS_PER_COLUMN)-1 downto 0); -- INPUT WEIGHTS
+    pesos_in_i : in perceptron_input((MATRIX_INPUTS * ROWS_PER_COLUMN)-1 downto 0); -- INPUT WEIGHTS
+    pesos_i : in perceptron_input(((ROWS_PER_COLUMN * ROWS_PER_COLUMN) * (COLUMNS - 3)) - 1 downto 0); -- MIDDLE WEIGHTS
     inputs_i : in perceptron_input(MATRIX_INPUTS-1 downto 0);
-    outputs_o : out perceptron_input(ROWS_PER_COLUMN-1 downto 0)
+    outputs_o : out perceptron_input(MATRIX_OUTPUTS-1 downto 0)
 );
 end entity;
 
@@ -64,13 +67,13 @@ begin
             last_col: entity work.perceptron_row
             generic map (
                 INPUTS => ROWS_PER_COLUMN,
-                OUTPUTS => ROWS_PER_COLUMN
+                OUTPUTS => MATRIX_OUTPUTS
             )
             port map(
                 clock_i => clock_i,
                 clr_i => clr_i,
                 enable_i => enable_i,
-                pesos_i => pesos_i((weight_per_row*i)-1 downto (weight_per_row * (i-1))),
+                pesos_i => pesos_out_i,
                 inputs_i => intercell_wires(i-1),
                 outputs_o => outputs_o
             );
