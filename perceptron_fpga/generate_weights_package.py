@@ -19,6 +19,10 @@ def main():
     package_name = sys.argv[1]
     weights_file = sys.argv[2]
     output_file = sys.argv[3]
+    if len(sys.argv) >= 5:
+        generated_function = sys.argv[4]
+    else:
+        generated_function = 'GetWeights'
 
 
     
@@ -31,11 +35,11 @@ def main():
             weights_str += get_number_line("pesos_i", total_weights, weight)
             total_weights += 1
 
-    write_weights_to_file(weights_str, total_weights, package_name, output_file)
+    write_weights_to_file(weights_str, total_weights, package_name, output_file, generated_function)
 
 
 
-def write_weights_to_file(weights_str, total_weights, package_name, output_file):
+def write_weights_to_file(weights_str, total_weights, package_name, output_file, generated_function):
     file_str = (
 f'''
 -- ARCHIVO AUTOGENERADO CON {str(sys.argv[0])}
@@ -47,12 +51,12 @@ use IEEE.numeric_std.all;
 use work.perceptron_package.perceptron_input;
 
 package {package_name} is
-    function GetWeights(Dummy: natural)
+    function {generated_function}(Dummy: natural)
     return perceptron_input;
 end package {package_name};
 
 package body {package_name} is
-    function GetWeights(Dummy: natural) return perceptron_input is
+    function {generated_function}(Dummy: natural) return perceptron_input is
         variable pesos_i : perceptron_input({total_weights-1} downto 0);
     begin
 {weights_str}

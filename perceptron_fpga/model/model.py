@@ -26,6 +26,8 @@ clf.fit(X_train, y_train)
 
 predicted = clf.predict(X_test)
 
+print(f"{clf.out_activation_=}")
+print(f"{clf.intercepts_=}")
 print("predicho:")
 print(predicted)
 print("real:")
@@ -33,7 +35,7 @@ print(y_test)
 print("error absoluto promedio: " + str(mean_absolute_error(y_test, predicted)))
 coefs = clf.coefs_
 
-coefs = [int(coef * 2**DECIMALS) for layer in coefs for row in layer for coef in row]
+coefs = [coef for layer in coefs for row in layer for coef in row]
 
 output = "coefs.txt"
 with open(output, "w") as f:

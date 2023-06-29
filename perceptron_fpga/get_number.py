@@ -24,7 +24,7 @@ def main():
 
     for i in range(3, len(sys.argv)):
         original_number = sys.argv[i]
-        number = int(original_number)<<32
+        number = round(float(original_number) * (2**32))
         if number < 0:
             binary_str = negative_str(number)
         else:
@@ -50,8 +50,8 @@ def add_underscores(my_str, group=16, char='_'):
 
 def get_number_line(variable_name, index, original_number):
     output_str = ""
-    shifted_number = int(original_number)<<32
-    if int(original_number) < 0:
+    shifted_number = round(float(original_number) * (2**32))
+    if float(original_number) < 0:
         binary_number = negative_str(shifted_number)
     else:
         binary_number = positive_str(shifted_number)

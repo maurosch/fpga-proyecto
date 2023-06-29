@@ -1,2 +1,4 @@
 work-*.cf
 **/*.pyc
+perceptron-env
+out
