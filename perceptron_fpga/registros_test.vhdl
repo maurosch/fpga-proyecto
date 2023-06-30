@@ -20,7 +20,7 @@ architecture behavior of registros_test is
 
 
 	-- Ouputs
-	signal outputs_o : perceptron_input(INPUTS downto 0);
+	signal outputs_o : perceptron_input(INPUTS - 1 downto 0);
 	signal output_0 : std_logic_vector(63 downto 0);
 	signal output_1 : std_logic_vector(63 downto 0);
 	signal output_2 : std_logic_vector(63 downto 0);
@@ -42,7 +42,7 @@ begin
 	enable_i <= '0', '1' after 300 ms;
 
 	contador: entity work.contador
-    generic map(MAX_NUMBER => INPUTS)
+    generic map(MAX_NUMBER => INPUTS - 1)
 	port map (clock_i => clock_i,
 		  clr_i => clr_i,
           enable_i => enable_i,

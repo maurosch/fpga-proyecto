@@ -22,6 +22,7 @@ end entity;
 architecture logic of registros is 
 begin
 	reg_proc: process(clock_i)
+        variable index : integer;
     begin
 		if rising_edge(clock_i) then
             if clr_i = '1' then
@@ -33,7 +34,8 @@ begin
             end if;
 
 			if write_enable_i = '1' then
-                outputs_o(to_integer(unsigned(selector))) <= input_i;
+                index := to_integer(unsigned(selector));
+                outputs_o(index) <= input_i;
                 if unsigned(selector) = (NEURALNET_INPUT - 1) then
                     output_valid <= '1';
                 end if;
