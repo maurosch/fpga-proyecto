@@ -7,10 +7,10 @@ use work.mnist_weights.GetWeights;
 use work.mnist_inputs.GetInputs;
 
 
-entity mnist_matrix_test IS
-end mnist_matrix_test;
+entity mnist_model_test IS
+end mnist_model_test;
 
-architecture behavior of mnist_matrix_test is 
+architecture behavior of mnist_model_test is 
     constant MATRIX_COLUMNS : natural := 3; -- Input + Middle + Output
     constant ROWS_PER_COLUMN : natural := 100;
     constant MATRIX_INPUTS : natural := 64;
