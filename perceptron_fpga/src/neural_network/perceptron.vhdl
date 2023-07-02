@@ -38,8 +38,7 @@ begin
                 -- funcion de activacion
                 if vacc(127) = '1' then
                     -- input_pesado negativo
-                    --output_o <= (others => '0');
-                    output_o <= std_logic_vector(vacc(63+DECIMALS downto DECIMALS));
+                    output_o <= (others => '0');
                 else
                     output_o <= std_logic_vector(vacc(63+DECIMALS downto DECIMALS));
                 end if;
