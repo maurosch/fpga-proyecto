@@ -25,8 +25,6 @@ architecture behavior of perceptron_matrix_test is
 
 	signal inputs_i : perceptron_input(MATRIX_INPUTS-1 downto 0);
 	signal biases_i : perceptron_input((MATRIX_OUTPUTS + ((MATRIX_COLUMNS-2) * ROWS_PER_COLUMN)) - 1 downto 0);
-	--signal input_0 : std_logic_vector(63 downto 0);
-	--signal input_1 : std_logic_vector(63 downto 0);
 	signal clock_i : std_logic := '1';
     signal clr_i : std_logic := '1';
 	signal enable_i : std_logic := '1';
@@ -50,12 +48,6 @@ begin
     pesos_i <= GetWeights(0);
     inputs_i <= GetInputs(0);
     biases_i <= GetBiases(0);
-
-    --input_0 <= b"0000000000000000_0000000000000011_0000000000000000_0000000000000000"; -- 3
-    --input_1 <= b"0000000000000000_0000000000000101_0000000000000000_0000000000000000"; -- 5
-
-    --inputs_i(0) <= input_0;
-    --inputs_i(1) <= input_1;
 
 	clr_i <= '1', '0' after 200 ms;
 	enable_i <= '0', '1' after 300 ms;
