@@ -23,6 +23,7 @@ port (
     pesos_in_i : in perceptron_input((MATRIX_INPUTS * ROWS_PER_COLUMN)-1 downto 0); -- INPUT WEIGHTS
     pesos_i : in perceptron_input(((ROWS_PER_COLUMN * ROWS_PER_COLUMN) * (COLUMNS - 3)) - 1 downto 0); -- MIDDLE WEIGHTS
     inputs_i : in perceptron_input(MATRIX_INPUTS-1 downto 0);
+    biases_i : in perceptron_input((MATRIX_OUTPUTS + ((COLUMNS-2) * ROWS_PER_COLUMN)) - 1 downto 0); -- TOTAL NEURONS
     outputs_o : out perceptron_input(MATRIX_OUTPUTS-1 downto 0)
 );
 end entity;
@@ -45,6 +46,7 @@ begin
                 enable_i => enable_i,
                 pesos_i => pesos_in_i,
                 inputs_i => inputs_i,
+                biases_i => biases_i(((i + 1) * ROWS_PER_COLUMN) - 1 downto (i * ROWS_PER_COLUMN)),
                 outputs_o => intercell_wires(i)
             );
         end generate first_column;
@@ -60,6 +62,7 @@ begin
                 enable_i => enable_i,
                 pesos_i => pesos_i((weight_per_row*i)-1 downto (weight_per_row * (i-1))),
                 inputs_i => intercell_wires(i-1),
+                biases_i => biases_i(((i + 1) * ROWS_PER_COLUMN) - 1 downto (i * ROWS_PER_COLUMN)),
                 outputs_o => intercell_wires(i)
             );
         end generate middle_columns;
@@ -75,6 +78,7 @@ begin
                 enable_i => enable_i,
                 pesos_i => pesos_out_i,
                 inputs_i => intercell_wires(i-1),
+                biases_i => biases_i((MATRIX_OUTPUTS + ((COLUMNS-2) * ROWS_PER_COLUMN)) - 1 downto (i * ROWS_PER_COLUMN)),
                 outputs_o => outputs_o
             );
         end generate last_column;

@@ -27,6 +27,10 @@ architecture behavior of perceptron_row_test is
     signal clr_i : std_logic := '1';
 	signal enable_i : std_logic := '1';
 
+    signal biases_i : perceptron_input(OUTPUTS-1 downto 0);
+    signal bias_0 : std_logic_vector(63 downto 0);
+    signal bias_1 : std_logic_vector(63 downto 0);
+    signal bias_2 : std_logic_vector(63 downto 0);
 	-- Ouputs
 	signal outputs_o : perceptron_input(OUTPUTS-1 downto 0);
 	signal output_0 : std_logic_vector(63 downto 0);
@@ -63,6 +67,13 @@ begin
     inputs_i(0) <= input_0;
     inputs_i(1) <= input_1;
 
+    bias_0 <= b"0000000000000000_0000000000000001_0000000000000000_0000000000000000"; -- 1
+    bias_1 <= b"0000000000000000_0000000000000000_0000000000000000_0000000000000000"; -- 0 
+    bias_2 <= b"0000000000000000_0000000000000010_0000000000000000_0000000000000000"; -- 2
+	biases_i(0) <= bias_0;
+	biases_i(1) <= bias_1;
+	biases_i(2) <= bias_2;
+
 	clr_i <= '1', '0' after 200 ms;
 	enable_i <= '0', '1' after 300 ms;
 
@@ -76,6 +87,7 @@ begin
 		  enable_i => enable_i,
 		  pesos_i => pesos_i,
 		  inputs_i => inputs_i,
+          biases_i => biases_i,
 		  outputs_o => outputs_o
 		  );
     output_0 <= outputs_o(0);

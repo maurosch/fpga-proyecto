@@ -15,6 +15,7 @@ port (
 	enable_i : in std_logic;
     pesos_i : in perceptron_input((INPUTS * OUTPUTS)-1 downto 0);
     inputs_i : in perceptron_input(INPUTS-1 downto 0);
+    biases_i : in perceptron_input(OUTPUTS-1 downto 0);
     outputs_o : out perceptron_input(OUTPUTS-1 downto 0)
 );
 end entity;
@@ -32,6 +33,7 @@ begin
             clock_i => clock_i,
             clr_i => clr_i,
             enable_i => enable_i,
+            bias_i => biases_i(i),
             output_o => outputs_o(i)
         );
     end generate;

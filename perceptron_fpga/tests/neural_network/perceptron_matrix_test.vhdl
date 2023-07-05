@@ -4,6 +4,8 @@ use IEEE.numeric_std.all;
 
 use work.perceptron_package.perceptron_input;
 use work.matrix_weights.GetWeights;
+use work.matrix_inputs.GetInputs;
+use work.matrix_biases.GetBiases;
 
 
 entity perceptron_matrix_test IS
@@ -22,8 +24,9 @@ architecture behavior of perceptron_matrix_test is
 	signal pesos_i : perceptron_input(TOTAL_WEIGHTS-1 downto 0);
 
 	signal inputs_i : perceptron_input(MATRIX_INPUTS-1 downto 0);
-	signal input_0 : std_logic_vector(63 downto 0);
-	signal input_1 : std_logic_vector(63 downto 0);
+	signal biases_i : perceptron_input((MATRIX_OUTPUTS + ((MATRIX_COLUMNS-2) * ROWS_PER_COLUMN)) - 1 downto 0);
+	--signal input_0 : std_logic_vector(63 downto 0);
+	--signal input_1 : std_logic_vector(63 downto 0);
 	signal clock_i : std_logic := '1';
     signal clr_i : std_logic := '1';
 	signal enable_i : std_logic := '1';
@@ -45,12 +48,14 @@ begin
 	end process;
 
     pesos_i <= GetWeights(0);
+    inputs_i <= GetInputs(0);
+    biases_i <= GetBiases(0);
 
-    input_0 <= b"0000000000000000_0000000000000011_0000000000000000_0000000000000000"; -- 3
-    input_1 <= b"0000000000000000_0000000000000101_0000000000000000_0000000000000000"; -- 5
+    --input_0 <= b"0000000000000000_0000000000000011_0000000000000000_0000000000000000"; -- 3
+    --input_1 <= b"0000000000000000_0000000000000101_0000000000000000_0000000000000000"; -- 5
 
-    inputs_i(0) <= input_0;
-    inputs_i(1) <= input_1;
+    --inputs_i(0) <= input_0;
+    --inputs_i(1) <= input_1;
 
 	clr_i <= '1', '0' after 200 ms;
 	enable_i <= '0', '1' after 300 ms;
@@ -69,6 +74,7 @@ begin
 		  pesos_i => pesos_i((MIDDLE_WEIGHTS+INPUT_WEIGHTS)-1 downto INPUT_WEIGHTS),
           pesos_out_i => pesos_i(TOTAL_WEIGHTS-1 downto MIDDLE_WEIGHTS + INPUT_WEIGHTS),
 		  inputs_i => inputs_i,
+          biases_i => biases_i,
 		  outputs_o => outputs_o
 		  );
     output_0 <= outputs_o(0);
