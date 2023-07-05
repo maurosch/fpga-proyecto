@@ -5,14 +5,15 @@ use IEEE.numeric_std.all;
 use work.perceptron_package.perceptron_input;
 use work.mnist_weights.GetWeights;
 use work.mnist_inputs.GetInputs;
+use work.mnist_biases.GetBiases;
 
 
 entity mnist_model_test IS
 end mnist_model_test;
 
 architecture behavior of mnist_model_test is 
-    constant MATRIX_COLUMNS : natural := 3; -- Input + Middle + Output
-    constant ROWS_PER_COLUMN : natural := 100;
+    constant MATRIX_COLUMNS : natural := 4; -- Input + Middle + Output
+    constant ROWS_PER_COLUMN : natural := 128;
     constant MATRIX_INPUTS : natural := 64;
     constant MATRIX_OUTPUTS : natural := 10;
     constant INPUT_WEIGHTS: natural := ROWS_PER_COLUMN * MATRIX_INPUTS;
@@ -22,6 +23,7 @@ architecture behavior of mnist_model_test is
 	-- Inputs
 	signal pesos_i : perceptron_input(TOTAL_WEIGHTS-1 downto 0);
 
+	signal biases_i : perceptron_input((MATRIX_OUTPUTS + ((MATRIX_COLUMNS-2) * ROWS_PER_COLUMN)) - 1 downto 0);
 	signal inputs_i : perceptron_input(MATRIX_INPUTS-1 downto 0);
 	signal input_0 : std_logic_vector(63 downto 0);
 	signal input_1 : std_logic_vector(63 downto 0);
@@ -119,6 +121,7 @@ begin
 
     pesos_i <= GetWeights(0);
     inputs_i <= GetInputs(0);
+    biases_i <= GetBiases(0);
     input_0 <= inputs_i(0);
     input_1 <= inputs_i(1);
     input_2 <= inputs_i(2);
@@ -201,6 +204,7 @@ begin
 		  pesos_i => pesos_i((MIDDLE_WEIGHTS+INPUT_WEIGHTS)-1 downto INPUT_WEIGHTS),
           pesos_out_i => pesos_i(TOTAL_WEIGHTS-1 downto MIDDLE_WEIGHTS + INPUT_WEIGHTS),
 		  inputs_i => inputs_i,
+          biases_i => biases_i,
 		  outputs_o => outputs_o
 		  );
     output_0 <= outputs_o(0);
